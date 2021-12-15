@@ -38,8 +38,12 @@
 								<p>I started with a 2D array and made the floor from this in code I then filled a tilemap with it. Them I added walls; this was
 									done by going through the array and checking each location to see if it was adjacent to a floor tile and if so what kind of wall
 									of wall it would need strait or a coroner leaving me will a walled ship </p>
-								<p>I then implemented the player, I made both the movement and shooting scripts separate as when coding the AI for the enemy i can
-									utilise it again. The movement is done by finding avalable tiles withing a range 
+								<p>I then implemented the player, I made both the movement and shooting scripts separate as when coding the AI for the enemy they can
+									also utilise it. The movement is done by finding available tiles within a range and returning it as a list of positions witch then
+									the player can handle and present the options to the player to click and decide. Shooting on the overhand utilises a struct shotData
+									to take the player and the enemy it wants to shoot and returns the struct that can then let the player know its options like whether
+									the shot is available as a bool, what path the shot will take and the damage associated, this can them be passed into a function that
+									lets the player take the shot.  
 								</p>
 							</section>
 
