@@ -28,23 +28,27 @@
 
 						<!-- Content -->
 							<section id="content" class="main">
-								<span class="image main"><img src="images/TurnBaseTopper.png" alt="" /></span>
+								<span class="image main"><img src="images/GDTopper.gif" alt="" /></span>
 								<h2>TurnBased</h2>
 								<p>This game is a turn based dungeon cruller with grid based movement and combat. One thing to distinguish it is the 
 									real time element with your depleting oxygen while you are making decisions trying to loot and escape the ship.
 								</p>
 								<h2>What I did</h2>
-								<p>This project was part of Game Development and was made over the course of about 10 weeks during the first semester of year 2.</p>
+								<p>This project was part of Game Development and was made over the course of about 12 weeks during the first semester of year 2.</p>
 								<p>I started with a 2D array and made the floor from this in code I then filled a tilemap with it. Them I added walls; this was
 									done by going through the array and checking each location to see if it was adjacent to a floor tile and if so what kind of wall
 									of wall it would need strait or a coroner leaving me will a walled ship </p>
-								<p>I then implemented the player, I made both the movement and shooting scripts separate as when coding the AI for the enemy they can
+								<p><span class="image right"><img src="images/GD219.png" alt="" /></span>I then implemented the player, I made both the movement and shooting scripts separate as when coding the AI for the enemy they can
 									also utilise it. The movement is done by finding available tiles within a range and returning it as a list of positions witch then
 									the player can handle and present the options to the player to click and decide. Shooting on the overhand utilises a struct shotData
 									to take the player and the enemy it wants to shoot and returns the struct that can then let the player know its options like whether
 									the shot is available as a bool, what path the shot will take and the damage associated, this can them be passed into a function that
 									lets the player take the shot.  
 								</p>
+								<p>This project also has a shop built into the main menu where the player can by and then use upgrades in the game these include movement, range, 
+									health and oxygen. these are all saved out to a file and saved so the player can use the same save over multiple sessions </p>
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/TYpr9QUwP1o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+								<a href="index.html"  class="button">Homepage</a>
 							</section>
 
 					</div>
@@ -52,33 +56,16 @@
 				<!-- Footer -->
 				
 					<footer id="footer">
-						<!--
+						
 						<section>
-							<h2>Aliquam sed mauris</h2>
-							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">Learn More</a></li>
-							</ul>
-						</section>
-						<section>
-							<h2>Etiam feugiat</h2>
-							<dl class="alt">
-								<dt>Address</dt>
-								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
-								<dt>Phone</dt>
-								<dd>(000) 000-0000 x 0000</dd>
-								<dt>Email</dt>
-								<dd><a href="#">information@untitled.tld</a></dd>
-							</dl>
+						
 							<ul class="icons">
-								<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>
+								<li></li><a href="https://twitter.com/WilliamIMiller" target="_blank" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
+								<li><a href="https://github.com/WilliamIMiller" target="_blank" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/williamimiller/" target="_blank" class="icon brands fa-linkedin alt"><span class="label">GitHub</span></a></li>
 							</ul>
 						</section>
-						-->
+						
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer> 
 
