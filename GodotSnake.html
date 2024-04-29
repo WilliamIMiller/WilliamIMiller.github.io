@@ -43,8 +43,8 @@
 						<header>
 							<div class="inner">
 								<h2>Very Hungry Snake - Godot</h2>
-								<p>A remake of my mobile dev project in a different engine Godot</p>
-								<h3>C# | Godot </h3>
+								<p>A remake of my mobile dev project in a different engine: Godot</p>
+								<h3>Godot | C#  </h3>
 							</div>
 						</header>
 
@@ -53,52 +53,66 @@
 								<div class="inner">
 									
 									<h3 class="major">Why Godot?</h3>
-									<p>Unity shitting in there hands and clapping with some of there pricing desitions and some studios
-										turning away form Unity becasue of it made me think what i wanted to lurn next. I used Unity for a lot 
-										of my uni projects and becasue the engine I am most conftible in during my time at university out the two we
-										used. I had used GameMaker Studio at collage, and Unity and Unreal Engine at university but chose to remake my mobile game project on Godot
-										for a few resons.
+									<p><span class="image left"><img src="images/PostUni/GodotSnakeEngine.png" alt="" /></span></p>
+									<p>Having used GameMaker Studio at college, and Unity and Unreal Engine at university I wanted to learn and try a new engine. 
+										I used Unity for a lot of my uni projects and became the engine I am most comfortable in. However given Unity’s recent 
+										decisions I wanted to try a game engine that wasn't tied to a licence. My decision was to try Godot.
 									</p>
 									<p>
-										It free and open source, I could use the engine how I liked and not have to worry about having to pay licencing or anything if I 
-										did end up relecing a project built in Godot. It also has a thriving comunity and smaller studios truning to use the engine with
-										a lot of the community comparing it to blender made me intrested to begin using and lurning it. <br><br> 
+										Godot is free and open source, I can use the engine how I like and not have to worry about having to pay licensing or anything 
+										if I did end up releasing a project built in Godot. It also has a thriving community and studios turning to use the engine such 
+										as Mega Crit. Blender has become an industry standard being an open source 3D graphics, and I think Godot has a chance to do the 
+										same.<br><br> 
 
-										Godot can eather have you use GDscript or C# when working in the engine. This made it appealing when coming over form Unity as I have
-										expireance using C# in my projects alredy and would allow me to begin working on lurning the engine. I plan to lurn more GDscript in 
-										my next Godot project and use a mixture of of the two languanges.
+										In Godot there are two main choices for scripting language: GDscript and C#, with other options when working in the engine. This 
+										made it appealing when coming over form Unity as I have experience using C# in my projects already and would allow me to begin 
+										working on learning the engine. I plan to learn GDscript in my next Godot project and use a mixture of the two languages in my 
+										next project as Godot does support cross-language scripting.
 
 									</p>
 
-									<h3 class="major">Same game, Difrent engine</h3>
+									<h3 class="major">Same game, Different engine</h3>
 									<p><span class="image right"><img src="images/PostUni/GodotSnake1.gif" alt="" /></span></p>
 
-									<p>Having choses to lurn Godot the question was what project could I do to learn. I wanted a project that was relitivle simple
-										but covered a multutude of difrent aspects to the engin. So a small mobile game that could cover all these areas. Having built
-										this game once befor in Unity I decided i wanted to remake it in Godot, it was a compleate game in Unity, a fun little mobile 
-										game that I alredy worked out how all the logic and behaviours worked. I also had a completed vertion in Unity and a comprahencive
-										Game design dicument made for the university modual, this let me focuse on the engien and understanding it rather than spending large
-										amound of time trouble shooting the game and more time making it work for a new engine.
+									<p>Having choses to learn Godot the question was what project could I do to learn. I wanted a project that was relatively simple 
+										but covered a multitude of different aspects to the engine. So a small mobile game that could cover all these areas. Having 
+										built this game once before in Unity I decided I wanted to remake it in Godot, it was a complete game in Unity, a fun little 
+										mobile game that I already worked out how all the logic and behaviours worked. I also had a completed and comprehensive Game 
+										design document made for the university module I could reference, this let me focus on the engine and understanding it rather 
+										than spending a large amount of time troubleshooting the game mechanics and more time making it work for a new engine.
 									 </p>
 
 									<h3 class="major">What I did</h3>
-									<p>I began the same way I did with the orignal project, building out the player and map generation
-										using similar stucture to the Unity vertion I imported the same assets form the original to use and made scenes for
-										the colectibals and colidables, using Groups to make colidables that will kill the snake.<br><br>
+									<p>I began the same way I did with the original project, building out the player and map generation using a similar 
+										structure to the Unity version. I imported the same assets from the original to use and made packed scenes for the 
+										collectibles and colidables, using Groups to make colidable nodes that will kill the snake.<br><br>
 										
-										The way the snake moves and grow is the same as the original however one change i did make was an optimization with how body pices move.
-										In the original Unity prototype I moved each body piece up one to where the previuse pice was, in the Godot vertion i changed it so only
-										the rear most pice is moved to behind the head insted of shuffiling the whole body. <br><br>
+										The way the snake moves is the same as the original, stepping on a timer node timeout signal instead of Unity’s coroutines. 
+										However one change I did make was a small optimization with how body pieces move. In the original Unity, when I was prototyping
+										I moved each body piece up one to where the previous piece was, shuffling the whole body up one.<br><br>
 
-										Another difrance i found when remaking this game is Unity and Godot have there axies set up drifrently, (explan difrance) this
-										ment when re-building the level generation code I had to take this into acound. Each of the tiles is using a scene that is refranced
-										in the script and spawned as a child of the map node.<br><br>
+										In the Godot version I changed it so only the rear most piece is moved to behind the head. The body pieces are stored in a 
+										queue as opposed to a list. A body part at the front of the queue dequeued moved to where the head just was and added back 
+										to the end of the queue making the queue be a list of body parts starting from the tail to the head, and when the snake grows 
+										we just add a new body part to the front of the snake not at the tail.<br><br>
 
-										Like this most difrances between the two engiens was mostly resulted in small tweeks to the original, I still used a fair number of
-										C# events, altho these could be replaced with Godot signals if I was using GDscript.
+										Another difference I found when remaking this game is Unity and Godot have their axis set up differently, where the Z axis is 
+										flipped. This meant when re-building the level generation code I had to take this into account with west becoming east and vice 
+										versa compared to the Unity version. Each of the tiles is using a scene that is referenced in the script and spawned as a child 
+										of the map node.<br><br>
+
+										In Unity I had a preface to us C# events compared to Unity events as I didn't have a need to link the events in the editor 
+										most of the time. This carried over into Godot, using C# events to call up the node tree towards the root node that holds the 
+										game manager script, which in turn holds references of the nodes below it to call on. <br><br>
+										
+										Godot has its on version of Unity Events with signals however outside of built in signals on nodes such as Timer and 
+										Button I didn’t use them still in favour of native C# events.
+
 									</p>
-									<h3 class="major">Whats next</h3>
-									<p>
+									<h3 class="major">What's next?</h3>
+									<p>Remaking a game I have made previously helped me wrap my head around Godot. It's time to push further ahead and make a new 
+										project game in the engine and push the engine and my skills further and try something new. This will start with a game design
+										 document and finding an idea that is just out of my current skill reach but still achievable in a reasonable time frame.
 									</p>
 									<section class="features">
 
