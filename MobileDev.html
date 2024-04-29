@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>William Miller - Godot Very Hungry Snake</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">William Miller</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="UniProjects.html">Uni Projects</a></li>								
+								
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>Mobile Dev - Very Hungry Snake</h2>
+								<p>
+								<h3>Unity | C#  </h3>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+									
+									<h3 class="major">What was this module?</h3>
+									<p><span class="image left"><img src="images/pic05.jpg" alt="" /></span></p>
+									<p>Mobile dev was a two semester modual at university where I built this mobile game. In semester one I made a Game Design Document (GDD), a vertical
+										and horizontal prototypes. Semester two foucused on building out a compleated game, including a two gamemodes
+										highscore
+									</p>									
+									<p>
+										<br><br> 
+
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+									</p>
+
+									<h3 class="major">Same game, Different engine</h3>
+									<p><span class="image right"><img src="images/PostUni/GodotSnake1.gif" alt="" /></span></p>
+
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+									 </p>
+
+									<h3 class="major">What I did</h3>
+									<p>I began the same way I did with the original project, building out the player and map generation using a similar 
+										structure to the Unity version. I imported the same assets from the original to use and made packed scenes for the 
+										collectibles and colidables, using Groups to make colidable nodes that will kill the snake.<br><br>
+										
+										The way the snake moves is the same as the original, stepping on a timer node timeout signal instead of Unity’s coroutines. 
+										However one change I did make was a small optimization with how body pieces move. In the original Unity, when I was prototyping
+										I moved each body piece up one to where the previous piece was, shuffling the whole body up one.<br><br>
+
+										In the Godot version I changed it so only the rear most piece is moved to behind the head. The body pieces are stored in a 
+										queue as opposed to a list. A body part at the front of the queue dequeued moved to where the head just was and added back 
+										to the end of the queue making the queue be a list of body parts starting from the tail to the head, and when the snake grows 
+										we just add a new body part to the front of the snake not at the tail.<br><br>
+
+										Another difference I found when remaking this game is Unity and Godot have their axis set up differently, where the Z axis is 
+										flipped. This meant when re-building the level generation code I had to take this into account with west becoming east and vice 
+										versa compared to the Unity version. Each of the tiles is using a scene that is referenced in the script and spawned as a child 
+										of the map node.<br><br>
+
+										In Unity I had a preface to us C# events compared to Unity events as I didn't have a need to link the events in the editor 
+										most of the time. This carried over into Godot, using C# events to call up the node tree towards the root node that holds the 
+										game manager script, which in turn holds references of the nodes below it to call on. <br><br>
+										
+										Godot has its on version of Unity Events with signals however outside of built in signals on nodes such as Timer and 
+										Button I didn’t use them still in favour of native C# events.
+
+									</p>
+									<h3 class="major">What's next?</h3>
+									<p>Remaking a game I have made previously helped me wrap my head around Godot. It's time to push further ahead and make a new 
+										project game in the engine and push the engine and my skills further and try something new. This will start with a game design
+										 document and finding an idea that is just out of my current skill reach but still achievable in a reasonable time frame.
+									</p>
+									<section class="features">
+
+									</section>
+
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+					<!-- Footer -->
+					<section id="footer">
+						<ul class="copyright">
+							<li>Design template by: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
