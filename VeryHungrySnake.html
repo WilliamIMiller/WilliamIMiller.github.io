@@ -32,6 +32,7 @@
 							<ul class="links">
 								<ul class="links">
 									<li><a href="index.html">Home</a></li>
+									<li><a href="VeryHungrySnake.html">Very Hungry Snake</a></li>
 									<li><a href="UniProjects.html">Uni Projects</a></li>								
 								</ul>
 							</ul>
@@ -43,8 +44,11 @@
 					<section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>Generic</h2>
-								<p>Phasellus non pulvinar erat. Fusce tincidunt nisl eget ipsum.</p>
+								<h2>Very Hungry Snake</h2>
+								<p>A Mobile Game Release, A version of snake over multiple generated frames to eat apples and try to survive</p>
+								<h3>Godot | C#  </h3>
+								<h3>Get the game below on Itch.io</h3>
+								<iframe frameborder="0" src="https://itch.io/embed/3553294?bg_color=497a44&amp;fg_color=ffffff&amp;link_color=ff3c78&amp;border_color=bebebe" width="552" height="167"><a href="https://isambard92.itch.io/very-hungry-snake">Very Hungry Snake by Isambard92</a></iframe>
 							</div>
 						</header>
 
@@ -52,75 +56,41 @@
 							<div class="wrapper">
 								<div class="inner">
 
-									<h3 class="major">Lorem ipsum dolor</h3>
-									<p>Morbi mattis mi consectetur tortor elementum, varius pellentesque velit convallis. Aenean tincidunt lectus auctor mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis non efficitur nisi, id malesuada justo. Maecenas sagittis felis ac sagittis semper. Curabitur purus leo donec vel dolor at arcu tincidunt bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla tincidunt. Aliquam eleifend ligula non velit accumsan cursus. Etiam ut gravida sapien.</p>
+									<p>This page is a break down of what I did to make the game and the why, to find out more about the game and play it see the Itch.io page</p>
 
-									<p>Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
+									<h3 class="major">Why Godot?</h3>
+									<p>The project idea and original version originated during universities’ Mobile game dev module. This was built in unity and included implementations for in-game ads and microtransactions to fulfill the assignment requirements. I decided I wanted to remake the game in godot as i wanted to learn the engine. I was drawn to the engine due to its open source nature and feature set.</p>
 
-									<h3 class="major">Vitae phasellus</h3>
-									<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+									<p>For this project I chose to C# as the original version in Unity used C# and I wanted to uterlie data structures like queues that GDScript is used to include. </p>
 
-									<section class="features">
-										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3 class="major">Sed feugiat lorem</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3 class="major">Nisl placerat</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
-										</article>
-									</section>
+
+									<h3 class="major">World Generation</h3>
+									<p>The world is generated in 15x15 chunks and includes 15 apples and a selection of trees to act as obstacles. After the initial implementation when the world generated there was a noticeable hitch in the game where the generation takes place. </p>
+
+									<p>To solve this generation is split down into two distinct steps. The first step is called upon both when the game is first loaded and after the previous generation completion. This first step to generating a chunk is called in a C# thread and runs when the player is completing the previous chunk. Where the initial implementation ran when the new area opened. This first step takes the placement of objects both the elements that make up the level and decision logic for tree placement and apple placement. This adds all objects that are going to be made when the new area opens to a list along with a list of new apple placements. </p>
+
+									<p>The second step is run when the new area is required. This checks the thread has finished and then simply loops through the list of objects and initialises them in the scene and then moves and re-activates the apples. The move to threads took level generations form 42ms when a new area is opened to just 7ms removing the noticeable hitch in gameplay when on mobile.</p>
+
+									<p>When the level fraim and trees are created new apples don't need to be re-generated every new chunk of level, the code will move and re-activate eaten apples from the previous frame only making new ones if it's the first chunk of the game. The decision of where to place the apples is done after tree placement in the threads.</p>
+
+									<p>Tree placement is simple as we pick how many trees we want from a range then we try and place them in a loop until they are all placed.</p>
+
+									<p>For apple generation we first generate a list of valid placements. This checks to make sure there isent a tree or wall on two or more sides of the apple, if there is the snake can not both enter and exit where the apple is occupying.</p>
+
+									<h3 class="major">Snake Movment</h3>
+									<p>The snake is made up of segments a head followed by the body. The head moves ether on a player input of on the step timer. The step timer using the godot timer node and triggers every 0.65 seconds. A step is also taken after a valid user input. This is done by taking the position of when a players finger first touches the screen and when it leves this is then used to determin what direction the swipe was. The snake can only then move to the side of its current heading and not backtrack. When the input is deemed valid it will then step, resetting the timer.</p> 
+
+									<p>When the snake moves the body must follow, this is represented by the body parts, stored by the snake in a queue, the body part furest form the snakes head is the front of the snakes body queue. If the snake is to not grow just move the end pice is moved to the spot behind where the head just was and turned into the correct part to keep the body continuity and the new head of the quese is turned into the tail segment.</p>
+
+									<p>Growning is determined by an int, this is so at the start of the game the snake can grown the inisul 3 body, and when a apple is eaten 1 is added to the grown value. When the snake takes a step is first check the growth and of the snakes needs to grow it will create the new body part instead of moving the tail to the head.</p>
+
+									
 
 								</div>
 							</div>
 
 					</section>
 
-				<!-- Footer -->
-					<section id="footer">
-						<div class="inner">
-							<h2 class="major">Get in touch</h2>
-							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="email" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-							<ul class="contact">
-								<li class="icon solid fa-home">
-									Untitled Inc<br />
-									1234 Somewhere Road Suite #2894<br />
-									Nashville, TN 00000-0000
-								</li>
-								<li class="icon solid fa-phone">(000) 000-0000</li>
-								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-								<li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
-								<li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
-								<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</section>
 
 			</div>
 
