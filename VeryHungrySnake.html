@@ -48,7 +48,7 @@
 								<p>A Mobile Game Release, A version of snake over multiple generated frames to eat apples and try to survive</p>
 								<h3>Godot | C#  </h3>
 								<h3>Get the game below on Itch.io</h3>
-								<iframe frameborder="0" src="https://itch.io/embed/3553294?bg_color=497a44&amp;fg_color=ffffff&amp;link_color=ff3c78&amp;border_color=bebebe" width="552" height="167"><a href="https://isambard92.itch.io/very-hungry-snake">Very Hungry Snake by Isambard92</a></iframe>
+								<iframe frameborder="0" src="https://itch.io/embed/3553294?linkback=true&amp;bg_color=497a44&amp;fg_color=ffffff&amp;link_color=ff3c78&amp;border_color=bebebe" width="552" height="167"><a href="https://isambard92.itch.io/very-hungry-snake">Very Hungry Snake by Isambard92</a></iframe>
 							</div>
 						</header>
 
@@ -59,7 +59,7 @@
 									<p>This page is a break down of what I did to make the game and the why, to find out more about the game and play it see the Itch.io page</p>
 
 									<h3 class="major">Why Godot?</h3>
-									<p>The project idea and original version originated during universities’ Mobile game dev module. This was built in unity and included implementations for in-game ads and microtransactions to fulfill the assignment requirements. I decided I wanted to remake the game in godot as i wanted to learn the engine. I was drawn to the engine due to its open source nature and feature set.</p>
+									<p>The project idea and original version originated during university’s mobile game dev module. This was built in unity and included implementations for in-game ads and microtransactions to fulfil the assignment requirements. I decided I wanted to remake the game in godot as i wanted to learn the engine. I was drawn to the engine due to its open source nature and feature set.</p>
 
 									<p>For this project I chose to C# as the original version in Unity used C# and I wanted to uterlie data structures like queues that GDScript is used to include. </p>
 
@@ -71,18 +71,24 @@
 
 									<p>The second step is run when the new area is required. This checks the thread has finished and then simply loops through the list of objects and initialises them in the scene and then moves and re-activates the apples. The move to threads took level generations form 42ms when a new area is opened to just 7ms removing the noticeable hitch in gameplay when on mobile.</p>
 
-									<p>When the level fraim and trees are created new apples don't need to be re-generated every new chunk of level, the code will move and re-activate eaten apples from the previous frame only making new ones if it's the first chunk of the game. The decision of where to place the apples is done after tree placement in the threads.</p>
+									<p>When the level frame and trees are created new apples don't need to be re-generated every new chunk of level, the code will move and re-activate eaten apples from the previous frame only making new ones if it's the first chunk of the game. The decision of where to place the apples is made after tree placement in the threads.</p>
 
-									<p>Tree placement is simple as we pick how many trees we want from a range then we try and place them in a loop until they are all placed.</p>
+									<p>Tree placement is simple, as we pick how many trees we want from a range, then we try and place them in a loop until they are all placed.</p>
 
-									<p>For apple generation we first generate a list of valid placements. This checks to make sure there isent a tree or wall on two or more sides of the apple, if there is the snake can not both enter and exit where the apple is occupying.</p>
+									<p>For the apple generation, we first generate a list of valid placements. This checks to make sure there isn't a tree or wall on two or more sides of the apple; if there is, the snake can not both enter and exit where the apple is occupying. </p>
 
-									<h3 class="major">Snake Movment</h3>
-									<p>The snake is made up of segments a head followed by the body. The head moves ether on a player input of on the step timer. The step timer using the godot timer node and triggers every 0.65 seconds. A step is also taken after a valid user input. This is done by taking the position of when a players finger first touches the screen and when it leves this is then used to determin what direction the swipe was. The snake can only then move to the side of its current heading and not backtrack. When the input is deemed valid it will then step, resetting the timer.</p> 
+									<h3 class="major">Snake Movement</h3>
+									<p>The snake is made up of segments, a head, followed by the body segments. The head moves either on a player's input or on the step timer. The step timer uses the Godot timer node and triggers every 0.65 seconds. A step is also taken after a valid user input. This is done by taking the position of when a player's finger first touches the screen and when it leaves. This is then used to determine what direction the swipe was. The snake can only then move to the side of its current heading and not backtrack. When the input is deemed valid, it will then step, resetting the timer.</p> 
 
-									<p>When the snake moves the body must follow, this is represented by the body parts, stored by the snake in a queue, the body part furest form the snakes head is the front of the snakes body queue. If the snake is to not grow just move the end pice is moved to the spot behind where the head just was and turned into the correct part to keep the body continuity and the new head of the quese is turned into the tail segment.</p>
+									<p>When the snake moves, the body must follow; this is represented by the body parts, stored by the snake in a queue. The body part furthest from the snake's head is the front of the snake's body queue. If the snake is not to grow and just move, the end piece is moved to the spot behind where the head just was and turned into the correct part to keep the body continuity and the new head of the snake’ tail queue is turned into the tail segment.</p>
 
-									<p>Growning is determined by an int, this is so at the start of the game the snake can grown the inisul 3 body, and when a apple is eaten 1 is added to the grown value. When the snake takes a step is first check the growth and of the snakes needs to grow it will create the new body part instead of moving the tail to the head.</p>
+									<p>Growing is determined by an int, this is so that at the start of the game the snake can grow the initial 3 body segments, and when an apple is eaten, 1 is added to the grown value. When the snake takes a step, it first checks the growth value of the snakes and it will create the new body part instead of moving the tail to the head when needed to grow.</p>
+
+									<h3 class="major">Game manager and UI, Signaling up calling down.</h3>
+
+									<p>The game manager attached to the root node contains the references to the various game elements below it, such as the snake, UI and the game map. The game manager subscribes to events called by these classes and controls the response. For example, when the snake dies, it emits a C# event that the game manager is listening for, and it then calls the UI to respond appropriately. This helps to reduce the number of dependencies everything needs between unrelated game elements.</p>
+
+									<p>The UI follows sute having a UI controller lisserning for Signals form the godot button nodes and controlling what panels are visible for the player and calling events up to the game manager when needed e.g. the player pusing play again after a death. Signals are used when using built in nodes like the buttons or inbuilt events like collitons on the snake parts and C# events in code when not needing to be attached in the Godot interface.</p>
 
 									
 
